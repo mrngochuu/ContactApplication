@@ -1,4 +1,8 @@
+package Form;
 
+
+import Util.MyUtils;
+import Util.Database;
 import java.sql.*;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -14,8 +18,6 @@ import javax.swing.JOptionPane;
  * @author ngochuu
  */
 public class LoginForm extends javax.swing.JFrame {
-    String driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
-    String url = "jdbc:sqlserver://192.168.0.10:1433; databasename=ContactDB; username=sa; password=NgocHuu215302577";
     /**
      * Creates new form LoginForm
      */
@@ -207,23 +209,18 @@ public class LoginForm extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelActionPerformed
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-        Connection con = ConnectionDB.connectDB(driver, url);
-        PreparedStatement ps;
-        ResultSet rs;
         try {
-            ps = con.prepareStatement("Select * from tblUsers where username = ? AND password = ?");
-            ps.setString(1, txtUsername.getText());
-            ps.setString(2, HashPassword.generateHash(String.valueOf(txtPassword.getPassword())));
-            rs = ps.executeQuery();
-            if(!rs.next()) {
+            boolean checkedAccount = Database.checkLogin(txtUsername.getText(), String.valueOf(txtPassword.getPassword()));
+            if(!checkedAccount) {
                 JOptionPane.showMessageDialog(null, "Username or password incorrect.");
                 return;
             } else {
                 JOptionPane.showMessageDialog(null, "Logging is successful.");
+                InfomationForm ctf = new InfomationForm(Database.getUserId(txtUsername.getText()));
+                ctf.setVisible(true);
+                ctf.pack();
+                this.dispose();
             }
-            rs.close();
-            ps.close();
-            con.close();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
             e.printStackTrace();
