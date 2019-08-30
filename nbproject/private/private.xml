@@ -3,11 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/Users/ngochuu/Desktop/ContactApplication/src/Util/MyUtils.java</file>
-            <file>file:/Users/ngochuu/Desktop/ContactApplication/src/Form/LoginForm.java</file>
-            <file>file:/Users/ngochuu/Desktop/ContactApplication/src/Form/ContactForm.java</file>
-            <file>file:/Users/ngochuu/Desktop/ContactApplication/src/Form/SignupForm.java</file>
-            <file>file:/Users/ngochuu/Desktop/ContactApplication/src/Util/Database.java</file>
+            <file>file:/Users/ngochuu/Desktop/ChatApplication/src/chat/OutputThread.java</file>
+            <file>file:/Users/ngochuu/Desktop/ChatApplication/src/form/InfomationForm.java</file>
+            <file>file:/Users/ngochuu/Desktop/ChatApplication/src/form/ChatForm.java</file>
+            <file>file:/Users/ngochuu/Desktop/ChatApplication/src/database/Database.java</file>
+            <file>file:/Users/ngochuu/Desktop/ChatApplication/src/main/LoginForm.java</file>
+            <file>file:/Users/ngochuu/Desktop/ChatApplication/src/chat/ChatPanel.java</file>
         </group>
     </open-files>
 </project-private>
