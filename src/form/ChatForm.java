@@ -7,6 +7,9 @@ package form;
 
 import chat.ChatPanel;
 import database.Database;
+import java.awt.List;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.sql.*;
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
@@ -14,13 +17,11 @@ import java.io.InputStreamReader;
 import java.net.Inet4Address;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.Random;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import javax.swing.ListModel;
 import util.MyUtils;
 
 /**
@@ -45,6 +46,8 @@ public class ChatForm extends javax.swing.JFrame {
     private Socket otherSocket = null;
     private BufferedReader otherBr = null;
     private DataOutputStream otherDos = null;
+    
+    // username others
 
     /**
      * Creates new form ChatForm
@@ -56,6 +59,7 @@ public class ChatForm extends javax.swing.JFrame {
         lblUserName.setText(username);
         this.setLocationRelativeTo(null);
         this.setResizable(false);
+        
         try {
             //random port and open server socket
             userPort = createPort();
@@ -122,6 +126,20 @@ public class ChatForm extends javax.swing.JFrame {
                 }
             }
         }).start();
+
+        //Close the window and delete socket in database
+        this.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                try {
+                    Database.executeUpdate("DELETE FROM tblSocket WHERE userID = " + userID);
+                    System.exit(0);
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, ex);
+                    ex.printStackTrace();
+                }
+            }
+        });
     }
 
     private int createPort() throws Exception {
@@ -299,7 +317,6 @@ public class ChatForm extends javax.swing.JFrame {
                             }
                         }
                         rs.close();
-                        Thread.sleep(500);
                     } catch (Exception e) {
                         JOptionPane.showMessageDialog(null, e);
                         e.printStackTrace();

@@ -8,8 +8,6 @@ package chat;
 import java.net.*;
 import java.io.*;
 import javax.swing.*;
-import javax.swing.text.BadLocationException;
-import javax.swing.text.DefaultStyledDocument;
 import javax.swing.text.Style;
 import javax.swing.text.StyleContext;
 import javax.swing.text.StyledDocument;
@@ -29,8 +27,6 @@ public class OutputThread extends Thread {
     private StyledDocument doc;
     private StyleContext context;
     private Style labelStyle;
-    //emoji
-    private final String[] emojies = {":happy:", ":neutral:", ":puzzled:", ":sad:", ":sleeping:", ":surprised:", ":vomited:", ":angry:", ":angel:"};
 
     public OutputThread(Socket chatSocket, JTextPane txtMessages, String sender, String receiver) {
         super();
@@ -38,12 +34,6 @@ public class OutputThread extends Thread {
         this.txtMessages = txtMessages;
         this.sender = sender;
         this.receiver = receiver;
-
-        context = new StyleContext();
-        doc = new DefaultStyledDocument(context);
-        labelStyle = context.getStyle(StyleContext.DEFAULT_STYLE);
-        txtMessages.setDocument(doc);
-
         //connect socket
         try {
             br = new BufferedReader(new InputStreamReader(this.socket.getInputStream()));
@@ -52,6 +42,8 @@ public class OutputThread extends Thread {
             e.printStackTrace();
             return;
         }
+
+        doc = txtMessages.getStyledDocument();
     }
 
     @Override
@@ -59,10 +51,8 @@ public class OutputThread extends Thread {
         while (true) {
             try {
                 if (socket != null) {
-                    String s;
-                    while ((s = br.readLine()) != null) {
-                        doc.insertString(doc.getLength(), receiver + ": " + s +"\n", null);
-                    }
+                    String s = br.readLine();
+                    doc.insertString(doc.getLength(), receiver + ": " + s + "\n", null);
                 }
                 Thread.sleep(500);
             } catch (Exception e) {

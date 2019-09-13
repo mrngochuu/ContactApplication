@@ -17,7 +17,7 @@ public class Database {
 
     private static final String DRIVER = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
     private static final String URL = "jdbc:sqlserver://192.168.0.10:1433; databasename=ContactDB; username=sa; password=NgocHuu215302577";
-    private static final String DEFAULT_PATH_IMG = "src/img/Unknown.png";
+    private static final String DEFAULT_PATH_IMG = "src/img/avatar/Unknown.png";
 
     public Database() {
     }

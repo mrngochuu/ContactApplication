@@ -2,10 +2,10 @@ package main;
 
 import database.Database;
 import form.ChatForm;
-import form.InfomationForm;
 import form.SignupForm;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import util.MyUtils;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -82,6 +82,12 @@ public class LoginForm extends javax.swing.JFrame {
 
         jLabel3.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
         jLabel3.setText("Password:");
+
+        txtUsername.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtUsernameActionPerformed(evt);
+            }
+        });
 
         cbxShow.setText("Show");
         cbxShow.addActionListener(new java.awt.event.ActionListener() {
@@ -245,6 +251,10 @@ public class LoginForm extends javax.swing.JFrame {
             e.printStackTrace();
         }
     }//GEN-LAST:event_btnLoginActionPerformed
+
+    private void txtUsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsernameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtUsernameActionPerformed
 
     /**
      * @param args the command line arguments
